@@ -19,9 +19,11 @@ const up = (matrix) => {
       // merge
       if (matrix[y][x] !== ' ') {
         for (let l = y + 1; l < matrix.length; l++) {
-          if (matrix[l][x] !== ' ' && matrix[y][x] === matrix[l][x]) {
-            matrix[y][x] *= 2;
-            matrix[l][x] = ' ';
+          if (matrix[l][x] !== ' ') {
+            if (matrix[y][x] === matrix[l][x]) {
+              matrix[y][x] *= 2;
+              matrix[l][x] = ' ';
+            }
             break;
           }
         }
@@ -48,9 +50,11 @@ const down = (matrix) => {
       // merge
       if (matrix[y][x] !== ' ') {
         for (let l = y - 1; l >= 0; l--) {
-          if (matrix[l][x] !== ' ' && matrix[y][x] === matrix[l][x]) {
-            matrix[y][x] *= 2;
-            matrix[l][x] = ' ';
+          if (matrix[l][x] !== ' ') {
+            if (matrix[y][x] === matrix[l][x]) {
+              matrix[y][x] *= 2;
+              matrix[l][x] = ' ';
+            }
             break;
           }
         }
@@ -77,9 +81,11 @@ const right = (matrix) => {
       // merge
       if (matrix[y][x] !== ' ') {
         for (let n = x - 1; n >= 0; n--) {
-          if (matrix[y][n] !== ' ' && matrix[y][x] === matrix[y][n]) {
-            matrix[y][x] *= 2;
-            matrix[y][n] = ' ';
+          if (matrix[y][n] !== ' ') {
+            if (matrix[y][x] === matrix[y][n]) {
+              matrix[y][x] *= 2;
+              matrix[y][n] = ' ';
+            }
             break;
           }
         }
@@ -106,9 +112,11 @@ const left = (matrix) => {
       // merge
       if (matrix[y][x] !== ' ') {
         for (let n = x + 1; n < matrix[y].length; n++) {
-          if (matrix[y][n] !== ' ' && matrix[y][x] === matrix[y][n]) {
-            matrix[y][x] *= 2;
-            matrix[y][n] = ' ';
+          if (matrix[y][n] !== ' ') {
+            if (matrix[y][x] === matrix[y][n]) {
+              matrix[y][x] *= 2;
+              matrix[y][n] = ' ';
+            }
             break;
           }
         }
@@ -118,9 +126,33 @@ const left = (matrix) => {
   return matrix;
 };
 
+const getNewRandomNumber = (maxNumber) => {
+  return Math.floor(Math.random() * maxNumber);
+};
+
+const genNewElements = (matrix) => {
+  let x1 = getNewRandomNumber(matrix.length);
+  let y1 = getNewRandomNumber(matrix.length);
+  while (matrix[y1][x1] !== ' ') {
+    x1 = getNewRandomNumber(matrix.length);
+    y1 = getNewRandomNumber(matrix.length);
+  }
+  for (let j = 0; j < matrix.length; j++) {
+    for (let i = 0; i < matrix[j].length; i++) {
+      if (matrix[j][i] === ' ') {
+        matrix[j][i] = ' ';
+        matrix[y1][x1] = Math.round(Math.random() + 1) * 2;
+      }
+      console.log('x1:', x1, 'y1', y1);
+      // console.log('j:', j, 'i', i);
+    }
+  }
+};
+
 module.exports = {
   up,
   down,
   right,
-  left
+  left,
+  genNewElements
 };
