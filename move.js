@@ -1,4 +1,8 @@
-// Felfelé gomb megnyomásánál használjuk
+/* >>>>>>>>>>>>>>> 2048 GAME <<<<<<<<<<<<<<< */
+
+// This file contains the navigation.
+
+// Run when you press up button
 const up = (matrix) => {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
@@ -27,7 +31,7 @@ const up = (matrix) => {
   return matrix;
 };
 
-// Lefelé gomb megnyomásánál használjuk
+// Run when you press down button
 const down = (matrix) => {
   for (let y = matrix.length - 1; y > 0; y--) {
     for (let x = 0; x < matrix[y].length; x++) {
@@ -56,7 +60,7 @@ const down = (matrix) => {
   return matrix;
 };
 
-// Jobbra gomb megnyomásánál használjuk
+// Run when you press right button
 const right = (matrix) => {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = matrix[y].length - 1; x > 0; x--) {
@@ -85,7 +89,7 @@ const right = (matrix) => {
   return matrix;
 };
 
-// Barlra gomb megnyomásánál használjuk
+// Run when you press left button
 const left = (matrix) => {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
