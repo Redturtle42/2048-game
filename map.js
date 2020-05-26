@@ -1,3 +1,7 @@
+/* >>>>>>>>>>>>>>> 2048 GAME <<<<<<<<<<<<<<< */
+
+// This file only contains only map data
+
 const generateMatrix = (rows, columns) => {
   const matrix = new Array(rows);
   for (let i = 0; i < rows; i++) {
@@ -37,10 +41,6 @@ const printMatrix = (matrix) => {
     }
   }
 };
-
-/* const printMatrixV2 = (matrix) => {
-  console.log(table.table(gameBoard));
-} */
 
 module.exports = {
   generateMatrix,
