@@ -1,33 +1,33 @@
-const table = require('table');
-const mapJs = require('./map');
-const moveJs = require('./move');
-const termkit = require('terminal-kit').terminal;
+/* >>>>>>>>>>>>>>> 2048 GAME <<<<<<<<<<<<<<< */
 
-const gameBoard = mapJs.generateMatrix(4, 4);
-mapJs.fillMatrix(gameBoard);
-// const inputPrintMatrix = mapJs.printMatrix(generateMatrix);
-console.log(table.table(gameBoard));
+// This file interacts by pressing a button
+
+const table = require('table');
+const map = require('./map');
+const move = require('./move');
+const termkit = require('terminal-kit').terminal;
+const gameBoard = map.generateMatrix(4, 4);
 
 termkit.grabInput();
 termkit.on('key', function (key) {
   if (key === 'UP') {
     termkit.clear();
-    moveJs.up(gameBoard);
+    move.up(gameBoard);
     console.log(table.table(gameBoard));
     console.log('U press up cursor.');
   } else if (key === 'DOWN') {
     termkit.clear();
-    moveJs.down(gameBoard);
+    move.down(gameBoard);
     console.log(table.table(gameBoard));
     console.log('U press down cursor.');
   } else if (key === 'RIGHT') {
     termkit.clear();
-    moveJs.right(gameBoard);
+    move.right(gameBoard);
     console.log(table.table(gameBoard));
     console.log('U press right cursor.');
   } else if (key === 'LEFT') {
     termkit.clear();
-    moveJs.left(gameBoard);
+    move.left(gameBoard);
     console.log(table.table(gameBoard));
     console.log('U press left cursor.');
   } else if (key === 'ENTER') {
@@ -39,3 +39,7 @@ termkit.on('key', function (key) {
     console.log('You press', key, 'key');
   }
 });
+
+module.exports = {
+  gameBoard
+};
