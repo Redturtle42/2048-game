@@ -2,27 +2,52 @@
 
 // This file will check if there are possible next move or merge.
 
-const checkLastMove = (matrix) => {
+// Always checkig if there are empty places.
+const checkEmptyPlace = (matrix) => {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
       if (matrix[y][x] === ' ') {
-        break;
-      } else if (matrix[y][x] !== ' ' && matrix[y][x] === matrix[y + 1][x]) {
-        break;
-      } else if (matrix[y][x] !== ' ' && matrix[y][x] === matrix[y][x + 1]) {
-        break;
-      } else if (matrix[y][x] !== ' ' && matrix[y][x] === matrix[y - 1][x]) {
-        break;
-      } else if (matrix[y][x] !== ' ' && matrix[y][x] === matrix[y][x - 1]) {
-        break;
-      } else {
-        console.log('Sajnos nincs több lépésed!');
-        break;
+        return true;
       }
     }
   }
+  return false;
+};
+
+// Always checkig if there are mergeable items.
+const mergeable = (matrix) => {
+  for (let y = 0; y < matrix.length - 1; y++) {
+    for (let x = 0; x < matrix[y].length; x++) {
+      if (matrix[y][x] !== ' ') {
+        for (let l = y + 1; l < matrix.length; l++) {
+          if (matrix[l][x] !== ' ') {
+            if (matrix[y][x] === matrix[l][x]) {
+              return true;
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
+  for (let y = 0; y < matrix.length; y++) {
+    for (let x = 0; x < matrix[y].length - 1; x++) {
+      if (matrix[y][x] !== ' ') {
+        for (let n = x + 1; n < matrix[y].length; n++) {
+          if (matrix[y][n] !== ' ') {
+            if (matrix[y][x] === matrix[y][n]) {
+              return true;
+            }
+            break;
+          }
+        }
+      }
+    }
+  }
+  return false;
 };
 
 module.exports = {
-  checkLastMove
+  checkEmptyPlace,
+  mergeable
 };
