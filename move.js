@@ -30,7 +30,6 @@ const up = (matrix) => {
       }
     }
   }
-  return matrix;
 };
 
 // Run when you press down button
@@ -61,7 +60,6 @@ const down = (matrix) => {
       }
     }
   }
-  return matrix;
 };
 
 // Run when you press right button
@@ -92,7 +90,6 @@ const right = (matrix) => {
       }
     }
   }
-  return matrix;
 };
 
 // Run when you press left button
@@ -123,36 +120,11 @@ const left = (matrix) => {
       }
     }
   }
-  return matrix;
-};
-
-const getNewRandomNumber = (maxNumber) => {
-  return Math.floor(Math.random() * maxNumber);
-};
-
-const genNewElements = (matrix) => {
-  let x1 = getNewRandomNumber(matrix.length);
-  let y1 = getNewRandomNumber(matrix.length);
-  while (matrix[y1][x1] !== ' ') {
-    x1 = getNewRandomNumber(matrix.length);
-    y1 = getNewRandomNumber(matrix.length);
-  }
-  for (let j = 0; j < matrix.length; j++) {
-    for (let i = 0; i < matrix[j].length; i++) {
-      if (matrix[j][i] === ' ') {
-        matrix[j][i] = ' ';
-        matrix[y1][x1] = Math.round(Math.random() + 1) * 2;
-      }
-      console.log('x1:', x1, 'y1', y1);
-      // console.log('j:', j, 'i', i);
-    }
-  }
 };
 
 module.exports = {
   up,
   down,
   right,
-  left,
-  genNewElements
+  left
 };
