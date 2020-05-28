@@ -2,6 +2,8 @@
 
 // This is the main file. Here we can call functions generated from the other documents. This is responsible for running the game.
 
+// const axel = require('axel');
+const center = require('center-align');
 const table = require('table');
 const termkit = require('terminal-kit').terminal;
 const checkJs = require('./check');
@@ -9,15 +11,16 @@ const mapJs = require('./map');
 const moveJs = require('./move');
 
 /* ---------------------------------------------------- */
+
 // Main Menu
 const mainMenu = () => {
   termkit.clear();
   termkit.hideCursor(true);
-  termkit.cyan('W E L C O M E   T O   2 0 4 8\n');
-  termkit.cyan('PLEASE CHOOSE FROM THE MENU ITEMS BELOW!\n');
-  const items = ['START NEW GAME', 'DIFFICULTY LEVEL', 'EXIT'];
+  termkit.cyan();
+  console.log(center('PLEASE CHOOSE FROM THE MENU ITEMS BELOW!\n', 80));
+  const items = center(['BABY MODE (2X2)\n', 'EASY GAME (4X4)\n', 'MEDIUM GAME (6X6)\n', 'HARD GAME (8X8)\n', 'FATALITY (12X12) - JUST FOR CHUCK NORRIS\n', 'EXIT\n'], 80);
   const options = {
-    selectedStyle: termkit.black.bgCyan
+    selectedStyle: termkit.black.brightRed
   };
   termkit.singleColumnMenu(items, options, (error, select) => {
     if (error) {
@@ -25,25 +28,16 @@ const mainMenu = () => {
     }
     termkit.clear();
     if (select.selectedIndex === 0) {
-      runNewGame();
+      runGame(2);
     } else if (select.selectedIndex === 1) {
-      const aboutMenuItems = ['Back'];
-      const about = 'Here you can choose difficulty level.';
-      console.log(about);
-      const options = {
-        y: 2,
-        selectedStyle: termkit.black.bgCyan
-      };
-      termkit.singleLineMenu(aboutMenuItems, options, (error, select) => {
-        if (error) {
-          return;
-        }
-        termkit.clear();
-        if (select.selectedIndex === 0) {
-          mainMenu();
-        }
-      });
+      runGame(4);
     } else if (select.selectedIndex === 2) {
+      runGame(6);
+    } else if (select.selectedIndex === 3) {
+      runGame(8);
+    } else if (select.selectedIndex === 4) {
+      runGame(12);
+    } else if (select.selectedIndex === 5) {
       termkit.hideCursor(false);
       process.exit();
     }
@@ -53,12 +47,12 @@ mainMenu();
 
 /* ---------------------------------------------------- */
 
-const runNewGame = () => {
+const runGame = (size) => {
   // Preparation, loading map
 
-  const gameBoard = mapJs.generateMatrix(4, 4);
+  const gameBoard = mapJs.generateMatrix(size, size);
   mapJs.fillMatrix(gameBoard);
-  console.log(table.table(gameBoard));
+  console.log(center(table.table(gameBoard), 80));
 
   // Main section. Logic, movement is here.
   termkit.hideCursor(true);
@@ -72,9 +66,8 @@ const runNewGame = () => {
       moveJs.right(gameBoard);
     } else if (key === 'LEFT') {
       moveJs.left(gameBoard);
-    } else if (key === 'ENTER') {
     } else if (key === 'CTRL_C' || key === 'q' || key === 'ESCAPE') {
-      console.log('Goodbye!');
+      console.log(center('Goodbye!', 80));
       termkit.hideCursor(false);
       process.exit();
     }
@@ -89,12 +82,12 @@ const runNewGame = () => {
     const merge = checkJs.mergeable(gameBoard);
     if (!check && !merge) {
       termkit.clear();
-      console.log(table.table(gameBoard));
-      console.log('Sajnos nincs több lépésed! A játék véget ért.');
+      console.log(center(table.table(gameBoard), 80));
+      console.log(center('GAME OVER', 80));
       termkit.hideCursor(false);
       process.exit();
     }
     termkit.clear();
-    console.log(table.table(gameBoard));
+    console.log(center(table.table(gameBoard), 80));
   });
 };

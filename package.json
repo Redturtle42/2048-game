@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/Redturtle42/2048-game#readme",
   "dependencies": {
+    "axel": "0.0.3",
+    "center-align": "^1.0.1",
     "table": "^5.4.6",
     "terminal-kit": "^1.35.2"
   }
