@@ -2,7 +2,7 @@
 
 // This file will check if there are possible next move or merge.
 
-// Always checkig if there are empty places.
+// Always checking if there are empty places.
 const checkEmptyPlace = (matrix) => {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
@@ -14,7 +14,7 @@ const checkEmptyPlace = (matrix) => {
   return false;
 };
 
-// Always checkig if there are mergeable items.
+// Always checking if there are mergeable items.
 const mergeable = (matrix) => {
   for (let y = 0; y < matrix.length - 1; y++) {
     for (let x = 0; x < matrix[y].length; x++) {

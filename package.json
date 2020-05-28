@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/Redturtle42/2048-game/issues"
   },
-  "homepage": "https://github.com/Redturtle42/2048-game#readme"
+  "homepage": "https://github.com/Redturtle42/2048-game#readme",
+  "dependencies": {
+    "get-pixels": "^3.3.2"
+  }
 }
