@@ -2,6 +2,8 @@
 
 // This file only contains only map related data.
 
+const EMPTY = '     ';
+
 // Generate 2DArray
 const generateMatrix = (rows, columns) => {
   const matrix = new Array(rows);
@@ -29,7 +31,7 @@ const fillMatrix = (matrix) => {
   }
   for (let i = 0; i < matrix.length; i++) {
     for (let j = 0; j < matrix[i].length; j++) {
-      matrix[i][j] = ' ';
+      matrix[i][j] = EMPTY;
       matrix[x1][y1] = 2;
       matrix[x2][y2] = 2;
     }
@@ -40,7 +42,7 @@ const fillMatrix = (matrix) => {
 const genNewElements = (matrix) => {
   let x1 = getRandomNumber(matrix.length);
   let y1 = getRandomNumber(matrix.length);
-  while (matrix[y1][x1] !== ' ') {
+  while (matrix[y1][x1] !== EMPTY) {
     x1 = getRandomNumber(matrix.length);
     y1 = getRandomNumber(matrix.length);
   }
