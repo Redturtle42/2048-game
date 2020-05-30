@@ -2,11 +2,13 @@
 
 // This file will check if there are possible next move or merge.
 
-// Always checkig if there are empty places.
+const EMPTY = '     ';
+
+// Always checking if there are empty places.
 const checkEmptyPlace = (matrix) => {
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
-      if (matrix[y][x] === ' ') {
+      if (matrix[y][x] === EMPTY) {
         return true;
       }
     }
@@ -14,13 +16,13 @@ const checkEmptyPlace = (matrix) => {
   return false;
 };
 
-// Always checkig if there are mergeable items.
+// Always checking if there are mergeable items.
 const mergeable = (matrix) => {
   for (let y = 0; y < matrix.length - 1; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
-      if (matrix[y][x] !== ' ') {
+      if (matrix[y][x] !== EMPTY) {
         for (let l = y + 1; l < matrix.length; l++) {
-          if (matrix[l][x] !== ' ') {
+          if (matrix[l][x] !== EMPTY) {
             if (matrix[y][x] === matrix[l][x]) {
               return true;
             }
@@ -32,9 +34,9 @@ const mergeable = (matrix) => {
   }
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length - 1; x++) {
-      if (matrix[y][x] !== ' ') {
+      if (matrix[y][x] !== EMPTY) {
         for (let n = x + 1; n < matrix[y].length; n++) {
-          if (matrix[y][n] !== ' ') {
+          if (matrix[y][n] !== EMPTY) {
             if (matrix[y][x] === matrix[y][n]) {
               return true;
             }
