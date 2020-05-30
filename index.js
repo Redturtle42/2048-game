@@ -29,22 +29,8 @@ const runGame = (size) => {
     } else if (key === 'LEFT') {
       moveJs.left(gameBoard);
     } else if (key === 'CTRL_C' || key === 'q' || key === 'ESCAPE') {
-      const myFunction1 = () => {
-        setImmediate(function () {
-          console.log('\x1Bc');
-          outputJs.neatStyle('\n\n\nHOPE SEE YOU SOON!\nGOODBYE!!!\n\n\n', 'console', 2, 3, true, ['white', 'magenta']);
-          termkit.grabInput(false);
-          termkit.hideCursor(true);
-        });
-      };
-      myFunction1();
-      const myFunction = () => {
-        setTimeout(function () {
-          termkit.hideCursor(false);
-          process.exit();
-        }, 2000);
-      };
-      myFunction();
+      outputJs.quitImmediate();
+      outputJs.quitLate();
     } else {
       return;
     }
@@ -65,6 +51,12 @@ const runGame = (size) => {
     outputJs.draw(gameBoard);
   });
 };
+
+// Introduction
+termkit.clear();
+outputJs.neatStyle('     \n2048\n     ', 'slick', 5, 0, true, ['magenta', 'red']);
+outputJs.neatStyle('WELCOME TO 2048!', 'console', 1, 0, false, ['white', 'magenta']);
+outputJs.neatStyle('PLEASE CHOOSE FROM THE MENU ITEMS BELOW!', 'console', 0, 0, true, ['white', 'magenta']);
 
 // Main Menu
 menuJs.mainMenu(runGame);
