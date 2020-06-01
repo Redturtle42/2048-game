@@ -7,7 +7,44 @@ const center = require('center-align');
 const CFonts = require('cfonts');
 const termkit = require('terminal-kit').terminal;
 
-const draw = (matrix) => {
+const config = {
+  columns: {
+    0: {
+      alignment: 'center',
+      width: 6
+    },
+    1: {
+      alignment: 'center',
+      width: 6
+    },
+    2: {
+      alignment: 'center',
+      width: 6
+    },
+    3: {
+      alignment: 'center',
+      width: 6
+    },
+    4: {
+      alignment: 'center',
+      width: 6
+    },
+    5: {
+      alignment: 'center',
+      width: 6
+    },
+    6: {
+      alignment: 'center',
+      width: 6
+    },
+    7: {
+      alignment: 'center',
+      width: 6
+    }
+  }
+};
+
+const drawTable = (matrix, score) => {
   termkit.clear();
   termkit.hideCursor(true);
   neatStyle('CHOOSE \'ESC\', \'q\' OR \'CTRL+C\' TO QUIT', 'console', 0, 0, true, ['white', 'magenta']);
@@ -16,7 +53,8 @@ const draw = (matrix) => {
   termkit.bold();
   termkit.brightWhite();
   console.log(center('   \u25B2    \u25BC    \u25C4    \u25BA    \n\n\n', process.stdout.columns));
-  console.log(center(table.table(matrix), process.stdout.columns));
+  console.log(center(table.table(matrix, config), process.stdout.columns));
+  neatStyle('Score: ' + score, 'console', 1, 0, true, ['white', 'magenta']);
 };
 
 const neatStyle = (text, fontFace, letterSpace, lineHeight, space, gradArray) => {
@@ -35,27 +73,25 @@ const neatStyle = (text, fontFace, letterSpace, lineHeight, space, gradArray) =>
     env: 'node'
   });
 };
+const welcomeText = () => {
+  termkit.clear();
+  neatStyle('     \n2048\n     ', 'slick', 5, 0, true, ['magenta', 'red']);
+  neatStyle('WELCOME TO 2048', 'console', 1, 0, false, ['magenta', 'red']);
+  neatStyle('PLEASE CHOOSE A MENU!', 'console', 1, 0, true, ['white', 'magenta']);
+};
 
 const quitImmediate = () => {
   setImmediate(function () {
     termkit.clear();
     neatStyle('\nHOPE SEE YOU SOON!\nGOODBYE!!!\n', 'console', 2, 3, true, ['white', 'magenta']);
-    termkit.grabInput(false);
-    termkit.hideCursor(true);
-  });
-};
-const quitLate = () => {
-  setTimeout(function () {
     termkit.hideCursor(false);
-    termkit.grabInput();
-    termkit.clear();
-    process.exit();
-  }, 1000);
+    termkit.grabInput(false);
+  });
 };
 
 module.exports = {
-  draw,
+  drawTable,
   neatStyle,
-  quitImmediate,
-  quitLate
+  welcomeText,
+  quitImmediate
 };

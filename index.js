@@ -2,7 +2,6 @@
 
 // This is the main file. Here we can call functions generated from the other documents. This is responsible for running the game.
 
-const center = require('center-align');
 const termkit = require('terminal-kit').terminal;
 
 const checkJs = require('./check');
@@ -13,50 +12,59 @@ const outputJs = require('./output');
 
 const runGame = (size) => {
   // Preparation, loading map
-  const gameBoard = mapJs.generateMatrix(size, size);
+  let gameBoard = null;
+  gameBoard = mapJs.generateMatrix(size, size);
   mapJs.fillMatrix(gameBoard);
-  outputJs.draw(gameBoard);
+  let stringBoard = mapJs.generateStringArray(gameBoard, size);
+  outputJs.drawTable(stringBoard, 0);
 
   // Main section. Logic, movement is here.
   termkit.grabInput();
+  let inGame = true;
+  let score = 0;
   termkit.on('key', function (key) {
-    if (key === 'UP') {
-      moveJs.up(gameBoard);
-    } else if (key === 'DOWN') {
-      moveJs.down(gameBoard);
-    } else if (key === 'RIGHT') {
-      moveJs.right(gameBoard);
-    } else if (key === 'LEFT') {
-      moveJs.left(gameBoard);
-    } else if (key === 'CTRL_C' || key === 'q' || key === 'ESCAPE') {
+    if (key === 'q' || key === 'ESCAPE') {
+      inGame = false;
+      outputJs.welcomeText();
+      menuJs.mainMenu(runGame);
+    } else if (key === 'CTRL_C') {
       outputJs.quitImmediate();
-      outputJs.quitLate();
-    } else {
-      return;
     }
 
-    // Checking if there are any empty place or something to merge.
-    let check = checkJs.checkEmptyPlace(gameBoard);
-    if (check) {
-      mapJs.genNewElements(gameBoard);
+    if (inGame) {
+      if (key === 'UP') {
+        score += moveJs.up(gameBoard);
+      } else if (key === 'DOWN') {
+        score += moveJs.down(gameBoard);
+      } else if (key === 'RIGHT') {
+        score += moveJs.right(gameBoard);
+      } else if (key === 'LEFT') {
+        score += moveJs.left(gameBoard);
+      }
+
+      // Checking if there are any empty place or something to merge.
+      let check = checkJs.checkEmptyPlace(gameBoard);
+      if (check) {
+        mapJs.genNewElements(gameBoard);
+      }
+      check = checkJs.checkEmptyPlace(gameBoard);
+      const merge = checkJs.mergeable(gameBoard);
+      stringBoard = mapJs.generateStringArray(gameBoard, size);
+      outputJs.drawTable(stringBoard, score);
+
+      // Game over
+      if (!check && !merge) {
+        stringBoard = mapJs.generateStringArray(gameBoard, size);
+        outputJs.drawTable(stringBoard, score);
+        outputJs.neatStyle('GAME OVER!\nPRESS ESC TO EXIT TO MENU!', 'console', 1, 2, true, ['white', 'magenta']);
+        inGame = false;
+      }
     }
-    check = checkJs.checkEmptyPlace(gameBoard);
-    const merge = checkJs.mergeable(gameBoard);
-    if (!check && !merge) {
-      outputJs.draw(gameBoard);
-      console.log(center('GAME OVER', process.stdout.columns));
-      termkit.hideCursor(false);
-      process.exit();
-    }
-    outputJs.draw(gameBoard);
   });
 };
 
 // Introduction
-termkit.clear();
-outputJs.neatStyle('     \n2048\n     ', 'slick', 5, 0, true, ['magenta', 'red']);
-outputJs.neatStyle('WELCOME TO 2048!', 'console', 1, 0, false, ['white', 'magenta']);
-outputJs.neatStyle('PLEASE CHOOSE FROM THE MENU ITEMS BELOW!', 'console', 0, 0, true, ['white', 'magenta']);
+outputJs.welcomeText();
 
 // Main Menu
 menuJs.mainMenu(runGame);

@@ -5,12 +5,14 @@
 const termkit = require('terminal-kit').terminal;
 const center = require('center-align');
 
+const outputJs = require('./output');
+
 const mainMenu = (game) => {
   termkit.hideCursor(true);
   termkit.bold();
-  
-  termkit.grabInput({ mouse: 'motion' });
-  const items = center(['BABY MODE (2X2)', 'EASY GAME (4X4)', 'MEDIUM GAME (6X6)', 'HARD GAME (8X8)', 'FATALITY (12X12) - JUST FOR CHUCK NORRIS', 'EXIT'], process.stdout.columns);
+
+  termkit.grabInput();
+  const items = center(['BABY MODE (2X2)', 'EASY GAME (4X4)', 'MEDIUM GAME (5X5)', 'HARD GAME (6X6)', 'FATALITY (8X8) - JUST FOR CHUCK NORRIS', 'EXIT'], process.stdout.columns);
   const options = {
     selectedStyle: termkit.black.brightRed
   };
@@ -24,14 +26,13 @@ const mainMenu = (game) => {
     } else if (select.selectedIndex === 1) {
       game(4);
     } else if (select.selectedIndex === 2) {
-      game(6);
+      game(5);
     } else if (select.selectedIndex === 3) {
-      game(8);
+      game(6);
     } else if (select.selectedIndex === 4) {
-      game(12);
+      game(8);
     } else if (select.selectedIndex === 5) {
-      termkit.hideCursor(false);
-      process.exit();
+      outputJs.quitImmediate();
     }
   });
 };
