@@ -1,6 +1,6 @@
 /* >>>>>>>>>>>>>>> 2048 GAME <<<<<<<<<<<<<<< */
 
-// This file only contains only map related data.
+// This file only contains map related data.
 
 const EMPTY = '\n  \n';
 
@@ -50,7 +50,8 @@ const genNewElements = (matrix) => {
 };
 
 // Convert original 2D array to bigger array, full of strings
-const generateStringArray = (matrix, size) => {
+const generateStringArray = (matrix) => {
+  const size = matrix.length;
   const matrix2 = generateMatrix(size, size);
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
@@ -66,7 +67,7 @@ const generateStringArray = (matrix, size) => {
 
 module.exports = {
   generateMatrix,
-  generateStringArray,
   fillMatrix,
-  genNewElements
+  genNewElements,
+  generateStringArray
 };

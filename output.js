@@ -45,16 +45,14 @@ const config = {
 };
 
 const drawTable = (matrix, score) => {
-  termkit.clear();
+  termkit.reset();
   termkit.hideCursor(true);
-  neatStyle('CHOOSE \'ESC\', \'q\' OR \'CTRL+C\' TO QUIT', 'console', 0, 0, true, ['white', 'magenta']);
-  neatStyle('UP DOWN LEFT RIGHT', 'console', 0, 0, false, ['white', 'magenta']);
-  termkit.magenta();
-  termkit.bold();
+  neatStyle('MAIN MENU: \'ESC\', \'q\'', 'console', 0, 0, true, ['#33E5BD', '#33E5BD']);
+  neatStyle('UP DOWN LEFT RIGHT', 'console', 0, 0, false, ['#33E5BD', '#33E5BD']);
   termkit.brightWhite();
   console.log(center('   \u25B2    \u25BC    \u25C4    \u25BA    \n\n\n', process.stdout.columns));
   console.log(center(table.table(matrix, config), process.stdout.columns));
-  neatStyle('Score: ' + score, 'console', 1, 0, true, ['white', 'magenta']);
+  neatStyle('Score: ' + score, 'console', 1, 0, true, ['#33E5BD', '#33E5BD']);
 };
 
 const neatStyle = (text, fontFace, letterSpace, lineHeight, space, gradArray) => {
@@ -74,16 +72,16 @@ const neatStyle = (text, fontFace, letterSpace, lineHeight, space, gradArray) =>
   });
 };
 const welcomeText = () => {
-  termkit.clear();
-  neatStyle('     \n2048\n     ', 'slick', 5, 0, true, ['magenta', 'red']);
-  neatStyle('WELCOME TO 2048', 'console', 1, 0, false, ['magenta', 'red']);
-  neatStyle('PLEASE CHOOSE A MENU!', 'console', 1, 0, true, ['white', 'magenta']);
+  termkit.reset();
+  neatStyle('     \n2048\n     ', 'slick', 5, 0, true, ['#e5bd33', '#33E5BD']);
+  neatStyle('PLEASE CHOOSE A MENU!', 'console', 1, 0, true, ['#e5bd33', '#33E5BD']);
 };
 
 const quitImmediate = () => {
   setImmediate(function () {
     termkit.clear();
-    neatStyle('\nHOPE SEE YOU SOON!\nGOODBYE!!!\n', 'console', 2, 3, true, ['white', 'magenta']);
+    termkit.bold();
+    neatStyle('GOODBYE', 'slick', 3, 3, true, ['#e5bd33', '#33E5BD']);
     termkit.hideCursor(false);
     termkit.grabInput(false);
   });
