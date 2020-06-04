@@ -2,7 +2,7 @@
 
 // This file will check if there are possible next move or merge.
 
-const EMPTY = '     ';
+const EMPTY = '\n  \n';
 
 // Always checking if there are empty places.
 const checkEmptyPlace = (matrix) => {

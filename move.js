@@ -2,10 +2,11 @@
 
 // This file contains the navigation.
 
-const EMPTY = '     ';
+const EMPTY = '\n  \n';
 
 // Run when you press up button
 const up = (matrix) => {
+  let count = 0;
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
       // move
@@ -24,6 +25,7 @@ const up = (matrix) => {
           if (matrix[l][x] !== EMPTY) {
             if (matrix[y][x] === matrix[l][x]) {
               matrix[y][x] *= 2;
+              count += matrix[y][x];
               matrix[l][x] = EMPTY;
             }
             break;
@@ -32,10 +34,12 @@ const up = (matrix) => {
       }
     }
   }
+  return count;
 };
 
 // Run when you press down button
 const down = (matrix) => {
+  let count = 0;
   for (let y = matrix.length - 1; y > 0; y--) {
     for (let x = 0; x < matrix[y].length; x++) {
       // move
@@ -54,6 +58,7 @@ const down = (matrix) => {
           if (matrix[l][x] !== EMPTY) {
             if (matrix[y][x] === matrix[l][x]) {
               matrix[y][x] *= 2;
+              count += matrix[y][x];
               matrix[l][x] = EMPTY;
             }
             break;
@@ -62,10 +67,12 @@ const down = (matrix) => {
       }
     }
   }
+  return count;
 };
 
 // Run when you press right button
 const right = (matrix) => {
+  let count = 0;
   for (let y = 0; y < matrix.length; y++) {
     for (let x = matrix[y].length - 1; x > 0; x--) {
       // move
@@ -84,6 +91,7 @@ const right = (matrix) => {
           if (matrix[y][n] !== EMPTY) {
             if (matrix[y][x] === matrix[y][n]) {
               matrix[y][x] *= 2;
+              count += matrix[y][x];
               matrix[y][n] = EMPTY;
             }
             break;
@@ -92,10 +100,12 @@ const right = (matrix) => {
       }
     }
   }
+  return count;
 };
 
 // Run when you press left button
 const left = (matrix) => {
+  let count = 0;
   for (let y = 0; y < matrix.length; y++) {
     for (let x = 0; x < matrix[y].length; x++) {
       // move
@@ -114,6 +124,7 @@ const left = (matrix) => {
           if (matrix[y][n] !== EMPTY) {
             if (matrix[y][x] === matrix[y][n]) {
               matrix[y][x] *= 2;
+              count += matrix[y][x];
               matrix[y][n] = EMPTY;
             }
             break;
@@ -122,6 +133,7 @@ const left = (matrix) => {
       }
     }
   }
+  return count;
 };
 
 module.exports = {
