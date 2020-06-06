@@ -17,7 +17,7 @@ const mainMenu = (game) => {
   termkit.grabInput({ mouse: 'motion' });
   const items = center(['BABY MODE (2X2)', 'EASY GAME (4X4)', 'MEDIUM GAME (5X5)', 'HARD GAME (6X6)', 'FATALITY (8X8) - JUST FOR CHUCK NORRIS', 'HIGH SCORE', 'EXIT'], process.stdout.columns);
   const options = {
-    selectedStyle: termkit.black.cyan
+    selectedStyle: termkit.black.green
   };
   termkit.singleColumnMenu(items, options, (error, select) => {
     termkit.clear();
@@ -41,7 +41,7 @@ const mainMenu = (game) => {
       const highScoreMenuItem = [center('PRESS ENTER TO MAIN MENU', process.stdout.columns)];
       const options = {
         y: 30,
-        selectedStyle: termkit.black.cyan
+        selectedStyle: termkit.black.green
       };
       termkit.singleColumnMenu(highScoreMenuItem, options, (error, select) => {
         if (error) {

@@ -44,6 +44,7 @@ const config = {
   }
 };
 
+// Draw the header, table(stringboard) and score
 const drawTable = (matrix, score) => {
   termkit.reset();
   termkit.hideCursor(true);
@@ -79,7 +80,7 @@ const welcomeText = () => {
 
 const quitImmediate = () => {
   setImmediate(function () {
-    termkit.clear();
+    termkit.reset();
     termkit.bold();
     neatStyle('GOODBYE', 'slick', 3, 3, true, ['#e5bd33', '#33E5BD']);
     termkit.hideCursor(false);
