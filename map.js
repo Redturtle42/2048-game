@@ -17,7 +17,7 @@ const getRandomNumber = (maxNumber) => {
   return Math.floor(Math.random() * maxNumber);
 };
 
-// Fill newly generated 2DArray with random numbers.
+// Fill newly generated 2DArray with two pieces random numbers.
 const fillMatrix = (matrix) => {
   let x1 = getRandomNumber(matrix.length);
   let x2 = getRandomNumber(matrix.length);

@@ -1,7 +1,12 @@
+/* >>>>>>>>>>>>>>> 2048 GAME <<<<<<<<<<<<<<< */
+
+// Contains the logic to load and save the high score.
+
 const center = require('center-align');
 const fs = require('fs');
 const table = require('table');
 
+// Load the highscore file, add the new score and save the file
 const saveScore = (name, point) => {
   const fileIn = fs.readFileSync('highscore.csv', 'utf8');
   const rows = fileIn.split('\n');
@@ -29,6 +34,7 @@ const saveScore = (name, point) => {
   fileOut.end();
 };
 
+// Load the highscore file and print it out
 const printScores = () => {
   const file = fs.readFileSync('highscore.csv', 'utf8');
   const rows = file.split('\n');
